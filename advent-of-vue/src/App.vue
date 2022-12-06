@@ -1,11 +1,55 @@
 <template>
-  <v-app>
+  <v-app :theme="theme">
+    <v-app-bar>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-spacer />
+
+      <v-btn
+        :prepend-icon="
+          theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'
+        "
+        @click="onClick"
+        >Toggle Theme</v-btn
+      >
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer">
+      <v-list v-model:opened="open">
+        <router-link to="/" custom v-slot="{ navigate }">
+          <v-list-item
+            prepend-icon="mdi-home"
+            title="Home"
+            @click="navigate"
+          ></v-list-item
+        ></router-link>
+        <v-list-group value="2022">
+          <template v-slot:activator="{ props }">
+            <v-list-item v-bind="props" title="2022" />
+          </template>
+
+          <router-link to="/posts" custom v-slot="{ navigate }">
+            <v-list-item title="Day 1" @click="navigate" />
+          </router-link>
+        </v-list-group>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-main>
-      <HelloWorld />
+      <v-container><router-view></router-view></v-container>
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-  import HelloWorld from '@/components/HelloWorld.vue'
+import { ref } from "vue";
+
+const theme = ref("light");
+
+function onClick() {
+  theme.value = theme.value === "light" ? "dark" : "light";
+}
+
+const drawer = ref(false);
+
+const open = ref([]);
 </script>
