@@ -50,7 +50,7 @@ function onClick() {
   theme.value = theme.value === "light" ? "dark" : "light";
 }
 
-const drawer = ref(false);
+const drawer = ref(true);
 
-const open = ref([]);
+const open = ref(['2022']);
 </script>
