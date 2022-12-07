@@ -1,14 +1,11 @@
 <template>
-  <v-container>
-    <p v-if="jokeState !== 'requesting'">
-      {{ jokeSetup }}
-    </p>
-    <p v-if="jokeState === 'answer'">{{ jokeResponse }}</p>
-    <v-btn @click="getAnswer()" v-if="jokeState === 'new'"> Tell Me! </v-btn>
-    <v-btn @click="getNewJoke()" v-if="jokeState === 'answer'">
-      New Joke
-    </v-btn>
-  </v-container>
+  <h1>Christmas Joke</h1>
+  <p v-if="jokeState !== 'requesting'">
+    {{ jokeSetup }}
+  </p>
+  <p v-if="jokeState === 'answer'">{{ jokeResponse }}</p>
+  <v-btn @click="getAnswer()" v-if="jokeState === 'new'"> Tell Me! </v-btn>
+  <v-btn @click="getNewJoke()" v-if="jokeState === 'answer'"> New Joke </v-btn>
 </template>
 
 <script setup lang="ts">
@@ -38,9 +35,9 @@ const jokeState = ref("gettingJoke" as JokeState);
 
 async function getNewJoke() {
   jokeState.value = "requesting";
-  const result = await (
+  const result = (await (
     await fetch("https://v2.jokeapi.dev/joke/christmas")
-  ).json() as JokeResponse;
+  ).json()) as JokeResponse;
   jokeSetup.value = result.setup;
   jokeResponse.value = result.delivery;
   jokeState.value = "new";
