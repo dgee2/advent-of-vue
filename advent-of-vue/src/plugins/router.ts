@@ -5,13 +5,16 @@
 // Composables
 import HelloWorldVue from "@/components/HelloWorld.vue"
 import { createRouter, createWebHashHistory } from "vue-router"
+import exercises from "@/services/exercises"
 
 // 2. Define some routes
 // Each route should map to a component.
 // We'll talk about nested routes later.
 const routes = [
     { path: '/', component: HelloWorldVue },
-]
+].concat(
+    exercises.map(x => ({ component: x.component, path: x.path }))
+)
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's

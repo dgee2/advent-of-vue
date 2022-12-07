@@ -19,7 +19,7 @@
           <v-list-item
             prepend-icon="mdi-home"
             title="Home"
-            @click="navigate"
+            @click="navigate()"
           ></v-list-item
         ></router-link>
         <v-list-group value="2022">
@@ -27,8 +27,8 @@
             <v-list-item v-bind="props" title="2022" />
           </template>
 
-          <router-link to="/posts" custom v-slot="{ navigate }">
-            <v-list-item title="Day 1" @click="navigate" />
+          <router-link v-for="exercise in exercises" :to="exercise.path" custom v-slot="{ navigate }" :key="exercise.path">
+            <v-list-item :title="exercise.name" @click="navigate()" />
           </router-link>
         </v-list-group>
       </v-list>
@@ -41,6 +41,7 @@
 </template>
 
 <script setup lang="ts">
+import exercises from "./services/exercises";
 import { ref } from "vue";
 
 const theme = ref("light");
