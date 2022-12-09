@@ -1,8 +1,15 @@
 <template>
-  <v-form style="width: 300px;">
-    <v-text-field v-model="displayTo" readonly solo />
-    <v-text-field v-model="displayFrom" readonly solo />
-  </v-form>
+  <v-container>
+    <v-card style="width: 300px">
+      <v-card-title>Merry Christmas!</v-card-title>
+      <v-card-text>
+        <v-form>
+          <v-text-field v-model="displayTo" readonly solo />
+          <v-text-field v-model="displayFrom" readonly solo />
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-container>
   <v-form>
     <v-text-field v-model="to" label="First name" />
     <v-text-field v-model="from" label="Last name" />
