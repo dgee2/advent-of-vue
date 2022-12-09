@@ -7,7 +7,7 @@
     :loading="loading"
   />
 
-  <v-list>
+  <v-list v-if="results.length">
     <v-list-item
       v-for="item in results"
       :key="item.id"
