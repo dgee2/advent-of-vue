@@ -1,15 +1,23 @@
 <template>
   <h1>Christmas Joke</h1>
-  <p v-if="jokeState !== 'requesting'">
-    {{ jokeSetup }}
-  </p>
-  <p v-if="jokeState === 'answer'">{{ jokeResponse }}</p>
-  <v-btn @click="getAnswer()" v-if="jokeState === 'new'"> Tell Me! </v-btn>
-  <v-btn @click="getNewJoke()" v-if="jokeState === 'answer'"> New Joke </v-btn>
+  <v-container>
+    <v-card min-height="80px" min-width="300px" max-width="500px" elevation="5">
+      <v-card-item>
+        <p v-show="jokeState !== 'requesting'">
+          {{ jokeSetup }}
+        </p>
+        <p v-show="jokeState === 'answer'">{{ jokeResponse }}</p>
+      </v-card-item>
+    </v-card>
+  </v-container>
+  <v-btn @click="getAnswer()" v-show="jokeState === 'new'"> Tell Me! </v-btn>
+  <v-btn @click="getNewJoke()" v-show="jokeState === 'answer'">
+    New Joke
+  </v-btn>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 type JokeState = "requesting" | "new" | "answer";
 
 type JokeResponse = {
@@ -50,5 +58,5 @@ function getAnswer() {
 const jokeSetup = ref("");
 const jokeResponse = ref("");
 
-getNewJoke();
+onMounted(getNewJoke);
 </script>

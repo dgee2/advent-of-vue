@@ -18,27 +18,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import debounce from "debounce";
-
-type SearchResult = {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
-};
-
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-};
+import { searchProducts, Product } from "@/services/products";
 
 const searchTerm = ref("");
 const results = ref([] as Product[]);
@@ -49,11 +29,7 @@ const findProducts = async (term: string) => {
   } else {
     try {
       loading.value = true;
-      const requestResults = await fetch(
-        `https://dummyjson.com/products/search?q=${term}`
-      );
-      const resultJson = (await requestResults.json()) as SearchResult;
-      results.value = resultJson.products;
+      results.value = await searchProducts(term);
     } finally {
       loading.value = false;
     }
