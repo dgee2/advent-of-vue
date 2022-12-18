@@ -3,7 +3,7 @@ import { Product } from '@/services/products'
 
 const availableItems = ref([] as Product[])
 const isFetchingItems = ref(true)
-const itemsToCompare = ref([])
+const itemsToCompare = ref([] as Product[])
 
 export const useItemComparison = () => ({
   availableItems,
