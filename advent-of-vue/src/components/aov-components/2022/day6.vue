@@ -1,4 +1,5 @@
 <template>
+  <h1>How many X items can you get for the price of a single Y item?</h1>
   <product-dropdown />
   <product-dropdown />
   <comparison-summary />

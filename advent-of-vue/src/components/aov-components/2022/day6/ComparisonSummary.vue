@@ -1,5 +1,5 @@
 <template>
-  <p>
+  <p v-if="cheapItem && expensiveItem">
     You can get <strong>{{ numCheaperItems }}</strong> <em>{{ cheapItem.title }}</em> for
     about the same price as a single <em>{{ expensiveItem.title }}</em>.
   </p>
@@ -18,7 +18,7 @@ const cheapItem = computed(() => itemsSortedByPrice.value[0]);
 const expensiveItem = computed(() => itemsSortedByPrice.value[1]);
 
 const numCheaperItems = computed(
-  () => expensiveItem.value.price / cheapItem.value.price
+  () => Math.floor(expensiveItem.value.price / cheapItem.value.price)
 );
 </script>
 
